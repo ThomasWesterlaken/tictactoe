@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="tictactoe.js" defer></script>
+    <style>
+        html,body{
+            width: 60%;
+            height: 100%;
+            margin-left: 25%; /* Space from this element (entire page) and others*/
+            overflow:hidden;
+            display:block;
+            box-sizing: border-box;
+            background-color: seashell;
+            min-height: 100vh;
+    }
+        
+        table#bord td {
+            width: 100px;
+            height:100px;
+            border:1px solid black;  
+            margin:5px;
+            text-align: center;
+            font-size: 200%;;
+        }
+
+        span 
+        {
+            font-size: 200%;
+        }
+
+        table#bord
+        {
+            /*want ruimte tussen cellen is lelijk Stijn ;)*/
+            border-collapse: collapse; 
+            padding-top: 5px;
+        }
+
+        container1
+        {
+            margin: auto;
+            width: 80%;
+            border-color: black;
+            border: 20px solid;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe!</h1>
+    <div class="symbolfactory">
+        <span draggable="true">X</span> - <span draggable="true">O</span>
+    </div>
+    <!-- Erg handig met live server !! -->
+
+
+    <table id="bord">
+        </table>
+    <div class="winnermessage">
+        <span></span>
+
+
+    </div>
+    <footer>Music by <a href="https://pixabay.com/users/lvymusic-27953103/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=121519">Yurii Kohut</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=121519">Pixabay</a> </footer>
+</body>
+</html>
+
