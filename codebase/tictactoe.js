@@ -5,14 +5,14 @@ let music = new Audio('musicbackground.mp3')
 music.loop = true
 
 let winningConditions = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ]
 
 for (let x = 0; x < 3; x++) {
@@ -22,8 +22,8 @@ for (let x = 0; x < 3; x++) {
         // rows 
         let cell = document.createElement('td') //create the row
         
-        cell.style.backgroundColor = (x % 2 && !(y % 2)) ? "grey" : "lightgrey"; // lookup ternary operators
-        
+        cell.style.backgroundColor = (x % 2 !== y % 2) ? "grey" : "lightgrey"
+
         row.appendChild(cell); // add row to DOM
         vakjes.push(cell); // adds cells to #vakjes
     }
@@ -39,12 +39,12 @@ document.querySelectorAll('.symbolfactory span').forEach(symbol => {
 
 vakjes.forEach(vakje => {
     vakje.addEventListener('dragover', (e) => e.preventDefault());
-    vakje.addEventListener('drop',  (e) => dropTicOfTac(e));
+    vakje.addEventListener('drop', (e) => dropTicOfTac(e));
 })
 
-musicplayer();
+musicPlayer();
 
-function musicplayer() { // functions should be either camalCase
+function musicPlayer() { // functions should be either camalCase
     music.volume = 0.15;
     music.play();
     setTimeout(() => {
@@ -52,8 +52,7 @@ function musicplayer() { // functions should be either camalCase
     }, 500);
 }
 
-function dropTicOfTac(event)
-{
+function dropTicOfTac(event) {
     let symbol = event.dataTransfer.getData('symbol');
     let cell = event.target;
     music.play();
@@ -61,52 +60,52 @@ function dropTicOfTac(event)
         alert(`The current player is ${currsymbol} but you tried to place ${symbol}`);
         return;
     }
-    
+
     if (!validatemove(cell)) {
         alert("You are not allowed to place a move here");
         return;
     }
-    
+
     cell.innerText = symbol;
-    
+
     if (currsymbol == "X") {
         currsymbol = "O";
-    } else{
+    } else {
         currsymbol = "X";
     }
-    
+
     let haswinnerresult = haswinner();
-    
-    if(haswinnerresult != null){
+
+    if (haswinnerresult != null) {
         colorin(haswinnerresult[0]);
         setwinmessage(haswinnerresult[1])
-    }   
+    }
 }
 
 function validatemove(square) {
-    return square.innerText == "" ? true : false; 
+    return square.innerText == "" ? true : false;
 }
 
-function haswinner() {  
-    for(i = 0; i < winningConditions.length; i++){
+function haswinner() {
+    for (i = 0; i < winningConditions.length; i++) {
         t = winningConditions[i];
         let result = checksequence(t);
-        if(result == null){
+        if (result == null) {
             continue;
         }
-        else{
+        else {
             return [t, result]
         }
-    } 
+    }
 }
 
 function checksequence(t) {
     if (vakjes[t[0]].innerText == "X" && vakjes[t[1]].innerText == "X" && vakjes[t[2]].innerText == "X") {
-         return "X"
+        return "X"
     }
-    
+
     if (vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O") {
-         return "O"
+        return "O"
     } else {
         return
     }
