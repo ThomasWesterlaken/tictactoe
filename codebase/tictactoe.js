@@ -104,8 +104,6 @@ function checksequence(t) {
 
     if (vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O") {
         return "O"
-    } else {
-        return
     }
 }
 
