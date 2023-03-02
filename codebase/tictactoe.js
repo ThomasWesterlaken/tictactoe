@@ -88,10 +88,10 @@ function haswinner() {
     for (i = 0; i < winningConditions.length; i++) {
         t = winningConditions[i];
         let result = checksequence(t);
+        
         if (result == null) {
             continue;
-        }
-        else {
+        } else {
             return [t, result]
         }
     }
