@@ -100,9 +100,7 @@ function haswinner() {
 function checksequence(t) {
     if (vakjes[t[0]].innerText == "X" && vakjes[t[1]].innerText == "X" && vakjes[t[2]].innerText == "X") {
         return "X"
-    }
-
-    if (vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O") {
+    } else if (vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O") {
         return "O"
     }
 }
