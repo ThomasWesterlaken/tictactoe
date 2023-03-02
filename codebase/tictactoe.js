@@ -47,9 +47,7 @@ musicPlayer();
 function musicPlayer() { // functions should be either camalCase
     music.volume = 0.15;
     music.play();
-    setTimeout(() => {
-        music.play();
-    }, 500);
+    setTimeout(music.play(), 500);
 }
 
 function dropTicOfTac(event) {
