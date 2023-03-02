@@ -1,8 +1,8 @@
-let vakjes = []; // collection of table details
-let gameactive = false;
+let vakjes = [] // collection of table details
+let gameactive = false
 let currsymbol = "X"
-let music = new Audio('musicbackground.mp3');
-music.loop = true;
+let music = new Audio('musicbackground.mp3')
+music.loop = true
 
 let winningConditions = [
     [0,1,2],
@@ -13,32 +13,17 @@ let winningConditions = [
     [2,5,8],
     [0,4,8],
     [2,4,6]
-  ];
+]
+
 for (let x = 0; x < 3; x++) {
     // columns
-    let row = document.createElement("tr"); // generates rows
-    for (let y = 0; y < 3; y++) 
-    {
+    let row = document.createElement("tr") // generates rows
+    for (let y = 0; y < 3; y++) {
         // rows 
-        let cell = document.createElement('td'); //create the row
-        if(x % 2){
-
-            if(y%2 == 0){
-                cell.style.backgroundColor = "grey"  
-            }
-            else{
-                cell.style.backgroundColor = "lightgrey"
-            }
-        }
-        else{
-            if(y%2 != 0){
-                cell.style.backgroundColor = "grey"  
-            }
-            else{
-                cell.style.backgroundColor = "lightgrey"
-            }
-
-        }
+        let cell = document.createElement('td') //create the row
+        
+        cell.style.backgroundColor = (x % 2 && !(y % 2)) ? "grey" : "lightgrey"; // lookup ternary operators
+        
         row.appendChild(cell); // add row to DOM
         vakjes.push(cell); // adds cells to #vakjes
     }
@@ -57,12 +42,9 @@ vakjes.forEach(vakje => {
     vakje.addEventListener('drop',  (e) => dropTicOfTac(e));
 })
 
-
 musicplayer();
 
-
-
-function musicplayer(){
+function musicplayer() { // functions should be either camalCase
     music.volume = 0.15;
     music.play();
     setTimeout(() => {
@@ -70,39 +52,42 @@ function musicplayer(){
     }, 500);
 }
 
-
 function dropTicOfTac(event)
 {
     let symbol = event.dataTransfer.getData('symbol');
     let cell = event.target;
     music.play();
-    if(currsymbol != symbol ){
+    if (currsymbol != symbol) {
         alert(`The current player is ${currsymbol} but you tried to place ${symbol}`);
         return;
     }
-    if(!validatemove(cell)){
+    
+    if (!validatemove(cell)) {
         alert("You are not allowed to place a move here");
         return;
     }
+    
     cell.innerText = symbol;
-    if(currsymbol == "X"){
+    
+    if (currsymbol == "X") {
         currsymbol = "O";
-    }
-    else{
+    } else{
         currsymbol = "X";
     }
+    
     let haswinnerresult = haswinner();
+    
     if(haswinnerresult != null){
         colorin(haswinnerresult[0]);
         setwinmessage(haswinnerresult[1])
     }   
 }
 
-function validatemove(square){
+function validatemove(square) {
     return square.innerText == "" ? true : false; 
 }
 
-function haswinner(){  
+function haswinner() {  
     for(i = 0; i < winningConditions.length; i++){
         t = winningConditions[i];
         let result = checksequence(t);
@@ -115,27 +100,24 @@ function haswinner(){
     } 
 }
 
-function checksequence(t){
-    
-    if(vakjes[t[0]].innerText == "X" && vakjes[t[1]].innerText == "X" && vakjes[t[2]].innerText == "X"){
-         return "X";
-    }
-    if(vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O"){
-         return "O";
-    }
-    else{
-        return;
+function checksequence(t) {
+    if (vakjes[t[0]].innerText == "X" && vakjes[t[1]].innerText == "X" && vakjes[t[2]].innerText == "X") {
+         return "X"
     }
     
+    if (vakjes[t[0]].innerText == "O" && vakjes[t[1]].innerText == "O" && vakjes[t[2]].innerText == "O") {
+         return "O"
+    } else {
+        return
+    }
 }
 
-function colorin(sequence){
-    for(i = 0; i < sequence.length; i++){
+function colorin(sequence) {
+    for (i = 0; i < sequence.length; i++) {
         vakjes[sequence[i]].style.backgroundColor = "red";
     }
 }
 
-function setwinmessage(winner){
-    document.querySelector('.winnermessage span').innerHTML    = `Congratiulations ${winner} has won the game!`;
-
+function setwinmessage(winner) {
+    document.querySelector('.winnermessage span').innerHTML = `Congratiulations ${winner} has won the game!`;
 }
